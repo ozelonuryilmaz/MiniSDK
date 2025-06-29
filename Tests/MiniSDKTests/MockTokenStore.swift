@@ -1,11 +1,12 @@
 @testable import MiniSDK
 
 final class MockTokenStore: TokenStoreProtocol {
-    var base64Enabled: Bool = false
+    var isBase64Enabled: Bool = false
     var savedToken: String?
     
-    func saveToken(_ token: String) {
+    func saveToken(_ token: String) -> String {
         savedToken = token
+        return token
     }
     
     func retrieveToken() -> String? {

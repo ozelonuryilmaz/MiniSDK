@@ -17,6 +17,7 @@ public final class MiniSDK {
         return instance
     }
     
+    // TODO: Consider removing nonisolated(unsafe) - it may be deprecated by Apple or cause unexpected behavior in the future
     private static let syncQueue = DispatchQueue(label: "com.minisdk.singleton", attributes: .concurrent)
     nonisolated(unsafe) private static var _privateInstance: MiniSDK? = nil
     private static var privateInstance: MiniSDK? {
@@ -29,10 +30,12 @@ public final class MiniSDK {
     // MARK: API Methods
     
     public static func initialize(apiKey: String) {
+        let environment: Environment = .production
+        
+        let config = Configuration(apiKey: apiKey, environment: environment)
+        let tokenStore = TokenStore(base64Enabled: environment == .production)
         let logger = SDKLogger(level: .info)
-        let tokenStore = TokenStore(base64Enabled: true)
         let lifecycleObserver = AppLifecycleObserver()
-        let config = Configuration(apiKey: apiKey, environment: .production)
         
         let instance = MiniSDK(
             configuration: config,
@@ -53,8 +56,8 @@ public final class MiniSDK {
     }
     
     public func sendPushToken(token: String) {
-        tokenStore.saveToken(token)
-        let logMessage = "Push Token Sent: \(tokenStore.base64Enabled ? " (Base64 encoded)" : "")"
+        let encodedToken = tokenStore.saveToken(token)
+        let logMessage = "Push Token Sent: \(encodedToken)\(tokenStore.isBase64Enabled ? " (Base64 encoded)" : "")"
         logger.log(logMessage, level: .info)
         trackEvent(name: "push_token_saved", payload: ["length": token.count])
     }
