@@ -1,10 +1,11 @@
 public protocol TokenStoreProtocol {
+    var base64Enabled: Bool { get }
     func saveToken(_ token: String)
     func retrieveToken() -> String?
 }
 
 public struct TokenStore: TokenStoreProtocol {
-    private let base64Enabled: Bool
+    public let base64Enabled: Bool
     
     public init(base64Enabled: Bool) {
         self.base64Enabled = base64Enabled
@@ -15,6 +16,6 @@ public struct TokenStore: TokenStoreProtocol {
     }
     
     public func retrieveToken() -> String? {
-        
+        return ""
     }
 }

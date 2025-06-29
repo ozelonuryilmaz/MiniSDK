@@ -1,3 +1,5 @@
+import Foundation
+
 public enum KeychainHelper {
     
     public static func save(key: String, data: Data) {
@@ -5,6 +7,6 @@ public enum KeychainHelper {
     }
     
     public static func load(key: String) -> Data? {
-        
+        return nil
     }
 }

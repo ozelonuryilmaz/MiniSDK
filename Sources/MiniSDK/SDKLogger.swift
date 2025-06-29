@@ -1,3 +1,5 @@
+import Foundation
+
 public protocol SDKLoggerProtocol {
     var currentLevel: LogLevel { get set }
     func log(_ message: String, level: LogLevel)
