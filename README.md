@@ -50,7 +50,7 @@ Hedefinize şu şekilde dahil edin:
 
 ### SDK Başlatma
 
-```
+```swift
 import MiniSDK
 
 MiniSDK.initialize(apiKey: "api-anahtarınız")
@@ -58,7 +58,7 @@ MiniSDK.initialize(apiKey: "api-anahtarınız")
 
 ### Push Token Gönderimi
 
-```
+```swift
 MiniSDK.shared.sendPushToken(token: "abc123")
 ```
 
@@ -67,7 +67,7 @@ MiniSDK.shared.sendPushToken(token: "abc123")
 
 ### Event Loglama
 
-```
+```swift
 MiniSDK.shared.trackEvent(name: "butona_tıklandı", payload: ["ekran": "AnaSayfa"])
 ```
 
